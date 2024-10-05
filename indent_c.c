@@ -33,7 +33,6 @@ static void do_indent(yed_frame *frame) {
     yed_line  *prev_line;
     int        i, indent_width,
                tabw;
-    yed_glyph  space;
 
     tabw = get_tabw();
 
@@ -55,9 +54,8 @@ static void do_indent(yed_frame *frame) {
         indent_width += tabw;
     }
 
-    space = G(' ');
     for (i = 0; i < indent_width; i += 1) {
-        yed_insert_into_line(frame->buffer, frame->cursor_line, 1, &space);
+        yed_insert_into_line(frame->buffer, frame->cursor_line, 1, G(" "));
     }
 
     yed_move_cursor_within_frame(frame, 0, indent_width);
@@ -251,7 +249,6 @@ void indent_line(yed_frame *frame, yed_line *line, int row, int tabw) {
     int col,
         rem, add,
         i;
-    yed_glyph space;
 
     col = 1;
 
@@ -265,9 +262,8 @@ void indent_line(yed_frame *frame, yed_line *line, int row, int tabw) {
     rem = (col - 1) % tabw;
     add = rem ? (tabw - rem) : tabw;
 
-    space = G(' ');
     for (i = 0; i < add; i += 1) {
-        yed_insert_into_line(frame->buffer, row, 1, &space);
+        yed_insert_into_line(frame->buffer, row, 1, G(" "));
     }
 }
 
